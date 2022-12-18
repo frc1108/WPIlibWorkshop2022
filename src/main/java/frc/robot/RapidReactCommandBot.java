@@ -4,14 +4,11 @@
 
 package frc.robot;
 
-import static edu.wpi.first.wpilibj2.command.Commands.parallel;
-
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.OIConstants;
-import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
+//import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Storage;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -28,7 +25,7 @@ public class RapidReactCommandBot {
   private final Drive m_drive = new Drive();
   private final Intake m_intake = new Intake();
   private final Storage m_storage = new Storage();
-  private final Shooter m_shooter = new Shooter();
+  // private final Shooter m_shooter = new Shooter();
 
   // The driver's controller
   CommandXboxController m_driverController =
@@ -45,30 +42,30 @@ public class RapidReactCommandBot {
   public void configureBindings() {
     // Automatically run the storage motor whenever the ball storage is not full,
     // and turn it off whenever it fills.
-    new Trigger(m_storage::isFull).whileFalse(m_storage.runCommand());
-
+   // new Trigger(m_storage::isFull).whileFalse(m_storage.runCommand());
+m_driverController.rightBumper().onTrue(m_storage.runCommand()).onFalse(m_storage.stopCommand());
     // Automatically disable and retract the intake whenever the ball storage is full.
-    new Trigger(m_storage::isFull).onTrue(m_intake.retractCommand());
+    // new Trigger(m_storage::isFull).onTrue(m_intake.retractCommand());
 
     // Control the drive with split-stick arcade controls
     m_drive.setDefaultCommand(
         m_drive.arcadeDriveCommand(
             () -> -m_driverController.getLeftY(), () -> -m_driverController.getRightX()));
 
-    // Deploy the intake with the X button
+    // // Deploy the intake with the X button
     m_driverController.x().onTrue(m_intake.intakeCommand());
-    // Retract the intake with the Y button
+    // // Retract the intake with the Y button
     m_driverController.y().onTrue(m_intake.retractCommand());
 
-    // Fire the shooter with the A button
-    m_driverController
-        .a()
-        .onTrue(
-            parallel(
-                    m_shooter.shootCommand(ShooterConstants.kShooterTargetRPS),
-                    m_storage.runCommand())
-                // Since we composed this inline we should give it a name
-                .withName("Shoot"));
+    // // Fire the shooter with the A button
+    // m_driverController
+    //     .a()
+    //     .onTrue(
+    //         parallel(
+    //                 m_shooter.shootCommand(ShooterConstants.kShooterTargetRPS),
+    //                 m_storage.runCommand())
+    //             // Since we composed this inline we should give it a name
+    //             .withName("Shoot"));
   }
 
   /**

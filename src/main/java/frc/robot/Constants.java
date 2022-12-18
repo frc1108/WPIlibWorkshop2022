@@ -16,17 +16,17 @@ import edu.wpi.first.math.util.Units;
  */
 public final class Constants {
   public static final class DriveConstants {
-    public static final int kLeftMotor1Port = 0;
-    public static final int kLeftMotor2Port = 1;
+    public static final int kLeftMotor1Port = 1;
+    public static final int kLeftMotor2Port = 3;
     public static final int kRightMotor1Port = 2;
-    public static final int kRightMotor2Port = 3;
+    public static final int kRightMotor2Port = 4;
 
     public static final int[] kLeftEncoderPorts = {0, 1};
     public static final int[] kRightEncoderPorts = {2, 3};
     public static final boolean kLeftEncoderReversed = false;
     public static final boolean kRightEncoderReversed = true;
 
-    public static final int kEncoderCPR = 1024;
+    public static final int kEncoderCPR = 42;
     public static final double kWheelDiameterMeters = Units.inchesToMeters(6);
     public static final double kEncoderDistancePerPulse =
         // Assumes the encoders are directly mounted on the wheel shafts
@@ -62,12 +62,12 @@ public final class Constants {
   }
 
   public static final class IntakeConstants {
-    public static final int kMotorPort = 6;
-    public static final int[] kSolenoidPorts = {0, 1};
+    public static final int kMotorPort = 42;
+    public static final int[] kSolenoidPorts = {5, 4};
   }
 
   public static final class StorageConstants {
-    public static final int kMotorPort = 7;
+    public static final int kMotorPort = 41;
     public static final int kBallSensorPort = 6;
   }
 
