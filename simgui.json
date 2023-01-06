@@ -1,0 +1,29 @@
+{
+  "HALProvider": {
+    "Other Devices": {
+      "SPARK MAX [41]": {
+        "header": {
+          "open": true
+        }
+      },
+      "SPARK MAX [4]": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
+      "/LiveWindow/Ungrouped/DigitalInput[6]": "Digital Input",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
+    }
+  },
+  "NetworkTables": {
+    "Retained Values": {
+      "open": false
+    }
+  }
+}
