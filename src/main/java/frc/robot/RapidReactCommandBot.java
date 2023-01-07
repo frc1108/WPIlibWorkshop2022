@@ -30,6 +30,8 @@ public class RapidReactCommandBot {
   // The driver's controller
   CommandXboxController m_driverController =
       new CommandXboxController(OIConstants.kDriverControllerPort);
+  CommandXboxController m_operatorController = 
+      new CommandXboxController(OIConstants.kOperatorControllerPort);
 
   /**
    * Use this method to define bindings between conditions and commands. These are useful for
@@ -48,13 +50,17 @@ m_driverController.rightBumper().onTrue(m_storage.runCommand()).onFalse(m_storag
     // new Trigger(m_storage::isFull).onTrue(m_intake.retractCommand());
 
     // Control the drive with split-stick arcade controls
-    m_drive.setDefaultCommand(
-        m_drive.arcadeDriveCommand(
-            () -> -m_driverController.getLeftY(), () -> -m_driverController.getRightX()));
+    m_drive.setDefaultCommand(m_drive.arcadeDriveCommand(
+        () -> -m_driverController.getLeftY(), () -> -m_driverController.getRightX()));
+    
+    // 
+    m_intake.setDefaultCommand(m_intake.activateCommand(
+        () -> m_operatorController.getRightX()));
 
-    // // Deploy the intake with the X button
-    m_driverController.x().onTrue(m_intake.intakeCommand());
-    // // Retract the intake with the Y button
+    // Deploy the intake with the X button
+    m_driverController.x().onTrue(m_intake.deployCommand());
+    
+    // Retract the intake with the Y button
     m_driverController.y().onTrue(m_intake.retractCommand());
 
     // // Fire the shooter with the A button
