@@ -73,4 +73,5 @@ public class TestIntake {
     m_intake.deployCommand();
     assertEquals(DoubleSolenoid.Value.kForward, m_simPiston.get());
   }
+  
 }
